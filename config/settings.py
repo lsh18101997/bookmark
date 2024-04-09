@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2',
+    'photo',
 ]
 
 MIDDLEWARE = [

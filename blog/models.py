@@ -11,7 +11,7 @@ class Post(models.Model):
     create_dt = models.DateTimeField("CREATE DATE", auto_now_add=True)
     modify_dt = models.DateTimeField("MODIFY DATE", auto_now=True)
     tags = TaggableManager(blank=True)
-    
+
     class Meta:
         verbose_name = 'post'
         verbose_name_plural ='posts'
