@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from mybookmark.models import Bookmark
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-class BookmarkLV(ListView):
+class BookmarkLV(LoginRequiredMixin, ListView):
     model = Bookmark
 
 class BookmarkDV(DetailView):

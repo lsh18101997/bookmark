@@ -5,13 +5,16 @@ from blog.models import Post
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, DayArchiveView, TodayArchiveView, TemplateView
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class PostLV(ListView):
+class PostLV(LoginRequiredMixin, ListView):
     model = Post
     template_name = "blog/post_all.html"
     context_object_name = 'posts' 
     paginate_by = 1
+    def get_queryset(self):
+        return self.model.objects.all()
 
 def dummpy_post(request):
     objects = Post.objects.all()
@@ -20,7 +23,7 @@ def dummpy_post(request):
     }
     return render(request, "blog/post_all.html", context)
 
-class PostDV(DetailView):
+class PostDV(LoginRequiredMixin, DetailView):
     model=Post
     template_name="blog/post_detail.html"
     # get_queryset - > get_object
@@ -34,7 +37,7 @@ class PostDV(DetailView):
         return context
     
 #--- ArchiveView
-class PostAV(ArchiveIndexView):
+class PostAV(LoginRequiredMixin, ArchiveIndexView):
     model = Post
     date_field = 'modify_dt'
     template_name = "blog/post_archive.html"

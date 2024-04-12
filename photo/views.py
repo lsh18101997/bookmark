@@ -3,9 +3,10 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Album, Photo
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class AlbumLV(ListView):
+class AlbumLV(LoginRequiredMixin, ListView):
     model=Album
     # context_object_name = 'object_list'
     # template_name='photo/album_list.html'    
